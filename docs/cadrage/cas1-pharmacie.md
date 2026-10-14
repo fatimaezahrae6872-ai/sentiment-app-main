@@ -1,9 +1,6 @@
-<<<<<<< HEAD
+
 # Fiche de cadrage : Ordonnances incomplètes en pharmacie
-=======
-git init
-git add -A# Fiche de cadrage : Ordonnances incomplètes en pharmacie
->>>>>>> 6a6f56cd7dbf7523c70c39cfdb7e1e1d53f908d3
+
 
 > Remplir chaque rubrique en une à trois phrases. Les rubriques marquées (obligatoire) sont vérifiées par `pytest`.
 
