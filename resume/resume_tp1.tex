@@ -1,0 +1,50 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{xcolor}
+
+\geometry{a4paper, margin=2.5cm}
+
+\title{\textbf{Résumé du Projet : Cadrage d'une Application IA et Préparation de l'Environnement (TP1)}}
+\author{Rapport d'Erreurs et Configuration}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Ce document présente un résumé du premier projet (TP1) intitulé \textbf{« Cadrer une application IA et préparer l'environnement »}. L'objectif principal de ce projet n'était pas de développer un modèle d'intelligence artificielle, mais plutôt d'apprendre à cadrer un besoin métier avant de coder et de mettre en place un environnement de développement reproductible (dépôt Git, environnement virtuel Python, tests et intégration continue).
+
+\section{Description des Problèmes Rencontrés}
+Au cours de la réalisation de ce TP, plusieurs erreurs liées à la configuration de l'environnement local ont été rencontrées. Ces problèmes illustrent parfaitement l'importance de bien isoler l'environnement de développement.
+
+\subsection{Problème de l'Environnement Virtuel (Conflit avec Anaconda)}
+Lors de l'exécution initiale des tests avec la commande \texttt{python -m pytest -q}, une erreur de type \texttt{AssertionError} s'est produite, ciblant précisément le test \texttt{test\_virtualenv\_active}. L'erreur affichée était la suivante : 
+\begin{quote}
+    \textcolor{red}{\texttt{AssertionError: pytest doit tourner dans le venv : source .venv/bin/activate}}
+\end{quote}
+
+\textbf{Cause de l'erreur :} \\
+Le diagnostic a révélé que le test comparait le chemin de l'interpréteur Python actif (\texttt{sys.prefix}) avec le chemin de base du système. Dans notre cas, Python utilisait l'installation globale d'\textbf{Anaconda} (\texttt{C:\textbackslash Users\textbackslash Aymen\textbackslash anaconda3}) au lieu de l'environnement virtuel local du projet (\texttt{.venv}). Cela signifie que l'environnement virtuel n'était pas correctement activé au moment du lancement des tests, ou que le terminal système pointait vers le mauvais interpréteur par défaut.
+
+\textbf{Résolution :} \\
+Pour résoudre ce problème, il a fallu s'assurer de bien activer l'environnement virtuel spécifique au projet en exécutant le script d'activation (\texttt{.\textbackslash .venv\textbackslash Scripts\textbackslash Activate.ps1} sous Windows PowerShell) avant de lancer \texttt{pytest}. Une fois l'environnement activé, le préfixe \texttt{(.venv)} est apparu dans l'invite de commande, permettant au script d'utiliser le bon interpréteur et aux tests de passer avec succès.
+
+\subsection{Problème de Version de Python (Absence de paquets précompilés)}
+Un autre problème majeur identifié concerne les versions de Python utilisées pour l'installation des dépendances du projet (via le fichier \texttt{requirements.txt}).
+
+\textbf{Cause de l'erreur :} \\
+Le projet exigeait des versions figées et spécifiques de certains paquets (par exemple, \texttt{scikit-learn==1.5.*} et \texttt{pandas==2.2.*}). L'utilisation de versions trop récentes de Python, telles que \textbf{Python 3.12 ou 3.13}, a causé des échecs lors de l'exécution de \texttt{pip install}. En effet, pour ces versions très récentes, il n'existait pas encore de paquets précompilés (\textit{wheels}) pour ces versions figées des dépendances. Par conséquent, \texttt{pip} tentait une compilation depuis les sources, ce qui se soldait par un échec en raison de l'absence de compilateur C/C++ adéquat sur la machine.
+
+\textbf{Résolution :} \\
+La solution a consisté à respecter les contraintes du projet en utilisant strictement \textbf{Python 3.11.x} (la version 3.10 étant également tolérée). Il a fallu installer Python 3.11, supprimer l'ancien environnement virtuel (\texttt{.venv}) qui était défectueux, et le recréer explicitement avec la commande liant la bonne version : \texttt{py -3.11 -m venv .venv}. Cette étape met en lumière une règle essentielle : figer les versions des dépendances implique de figer également la version de l'interpréteur Python pour garantir la reproductibilité.
+
+\section{Conclusion}
+Malgré ces obstacles initiaux liés à la configuration locale et aux conflits de versions de Python, les problèmes ont pu être diagnostiqués et résolus. Le script de vérification a finalement validé l'installation (\texttt{0 erreur(s), 0 avertissement(s)}) et l'ensemble des 38 tests a été passé avec succès (\texttt{38 passed in 6.35s} / \texttt{1.72s}), confirmant que la structure du dépôt est conforme, que Git est bien configuré, et que l'environnement est correctement isolé et fonctionnel.
+
+\end{document}
