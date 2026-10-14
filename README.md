@@ -44,4 +44,4 @@ sentiment-app/
 | Rôle | Nom | Identifiant GitHub | Travail de la semaine 1 |
 | --- | --- | --- | --- |
 | Membre A | Attoubi Fatima Zahra | [@fatimaezahrae6872-ai] | Création du dépôt, setup de l'environnement, fiches de cadrage |
-| Membre B | | | |
+| Membre B |Attoubi Fatima Zahra  |[@fatimaezahrae6872-ai]  | |
