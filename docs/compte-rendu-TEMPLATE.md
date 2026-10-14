@@ -1,8 +1,8 @@
 # Compte rendu global des TP1 à TP3
 
-**Binôme :** [Nom 1] ([@login1]) et [Nom 2] ([@login2])
-**Dépôt :** https://github.com/[compte]/sentiment-app
-**Date :** [jj/mm/aaaa]
+**Binôme :** [Attoubi fatima zahra ] ([@fatimaezahrae6872-ai]) et [Attoubi fatima zahra] ([@fatimaezahrae6872-ai])
+**Dépôt :** https://github.com/fatimaezahrae6872-ai/sentiment-app-main
+**Date :** [14/10/2026]
 
 > Remplacez chaque crochet. Supprimez les consignes en citation avant de rendre.
 > Quatre à six pages. Vos chiffres, pas ceux du corrigé.
